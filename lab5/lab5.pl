@@ -1,0 +1,141 @@
+/*
+        CS471 - Programming Languages
+        Assignment #<5> due: <10/03/2014>
+        Author: <Cardenuto>, <Alexander> (<acarden1@binghamton.edu>)
+        Date: <10/02/2014>
+ */
+
+
+/* 1:(10pts) Define a predicate "simplity/3" that succeeds if the last argument is 
+      a list with items with the form Var:Value,  
+      the first argument is a "var" atom in the list and 
+      the second argument is the var's Value.  Requires only one clause.
+*/
+
+%http://www.swi-prolog.org/pldoc/man?predicate=member/2
+	simplify(b,Value,Lst) :- member(b:Value,Lst).
+
+      
+ /* 2: (10pts).   In lab 4  problem 9, you wrote a predicate 'swap/2'.  What is the time complexity
+                         of 'swap/2' ?  What are your assumptions?
+     */ 
+      % The time complexity is 2n^2. I am assuming that the the tree is balanced. Also, that the two sides of the tree have roughly the same number of nodes. 
+
+
+/* 3:  Syntax-Directed Differentiation:  A motivating example illustrating the 
+         power of pattern matching in Prolog.
+         Consider the following rules for symbolic differentiation
+         (U, V are mathematical expressions, x is a variable):
+
+        %dx/dx = 1
+       % d(C)/x = 0.
+        %d(Cx)/x = C               (C is a constant)
+        %d(-U)/dx = -(dU/dx)
+       % d(U+V)/dx = dU/dx + dV/dx
+        d(U-V)/dx = dU/dx - dV/dx
+        d(U*V)/dx = U*(dV/dx) + V*(dU/dx)
+        d(U^n)/dx = nU^(n-1)*(dU/dx)
+
+        These rules can easily be translated into Prolog, for instance,
+        the second rule can be defined as
+                   d(C,x,0):-integer(C).
+          and the fifth rule can be defined as
+                   d(U+ V ,x, DU+ DV):-d(U,x,DU),d(V,x,DV).
+*/
+%http://en.wikibooks.org/wiki/Prolog/Built-in_predicates
+%http://en.wikipedia.org/wiki/Differentiation_rules
+	d(x,x,1).
+	d(C,x,0):-integer(C).
+	d(C*x,x,C) :- integer(C).
+	d(-U,x,-DU) :- d(U,x,DU).
+	d(U + V ,x, DU + DV):- d(U,x,DU),d(V,x,DV).
+	d(U - V ,x, DU - DV):- d(U,x,DU),d(-V,x,DV).
+	d(U * V ,x, DU * V + U * DV):- d(U,x,DU),d(V,x,DV).
+	d(U^N,x,N * U ^ (M) * DU) :- M is N - 1, d(U,x,DU).
+
+
+
+
+/* 4: Given a list of predicates, applylist(L) succeeds only if
+      each of the predicates in the list succeeds. Note: the scope
+      of variables names is the entire list. You can apply each predicate
+      at the prompt to see how they work.  Make up your own. (2 lines)
+
+  */
+	applylist([]).
+	applylist([A|Lst]) :- call(A), applylist(Lst).
+
+
+
+/*5:(10 pts) Define a predicate append3DL  that concatenates three difference lists:
+   ?- append3DL( [z,y|A] - A, [x,w | B] -B, [u,v | C] - C, What).
+   A = [x, w, u, v|C],
+   B = [u, v|C],
+   What = [z, y, x, w, u, v|C]-C]
+
+*/
+	
+	append3DL(A-B,B-C,C-D,D-A).
+
+
+ %6. prodR(+N,?P).
+/* Given a number, N, P is a list of the product of the numbers from N
+   down to 1 such that first number in P is the product of all the number from N to 1, 
+   the second number in P the product of all the numbers from N-1 down to 1 etc.
+   For example:
+     
+     ?- prodR(6,P).
+     P =[720, 120, 24, 6, 2, 1] .
+*/ 	
+	prodR(1,[1]).
+	prodR(A,[B,C|Lst]) :- D is A -1, prodR(D,[C|Lst]), B is A * C.
+
+
+/** 7: In lab 4 your examined "Send more money" a well-known puzzle. Each of the letters
+    D,E,M,N,O,R,S and Y represents a different digit. Moreover, when each
+    letter is mapped to its corresponding digit the equation SEND + MORE =
+    MONEY holds. Below is a very naive implementation. Since there are 8 letters 
+    to be solved, it simply explore the 10*9*...*3 mappings of letters to
+    digits. 
+    
+    A little insight can simplify things. Clearly, SEND < 9999 and 
+    MORE < 9999. Thus MONEY < 19998 and hence M = 1. 
+    Now we have SEND + 1ORE = 1ONEY. Again SEND < 9999 
+     and now 1ORE < 1999 so 1ONEY < 11998. Since M is already bound to 1, 
+     O must be bound to 0. A little more thought shows that S must be
+     bound to 8 or 9, and that N = E + 1. Using these insights to reduce
+     the number of solutions that must be explored, write a Prolog
+     predicate soln([D,E,M,N,O,R,S,Y]) that solves this puzzle by binding
+     the correct digits to each of the variables in the list. (Modified 
+     from http://www.cs.wisc.edu/~fischer/)
+    (1 clause with multiple subgoals.)
+*/
+
+solvSlow( [D,E,M,N,O,R,S,Y]) :-
+	Lst = [S,E,N,D,M,O,R,Y],
+	Digits = [0,1,2,3,4,5,6,7,8,9],
+	assign_digits(Lst, Digits),
+	M > 0, 
+	S > 0,
+	1000*S + 100*E + 10*N + D +
+	1000*M + 100*O + 10*R + E =:=
+	10000*M + 1000*O + 100*N + 10*E + Y,
+	write(Lst).
+
+
+assign_digits([], _List).
+assign_digits([D|Ds], List):-
+        select(D, List, NewList),
+        assign_digits(Ds, NewList).
+     
+%http://en.wikipedia.org/wiki/Verbal_arithmetic   
+soln( [D,E,M,N,O,R,S,Y]) :- 
+	Lst = [S,E,N,D,M,O,R,Y],
+	Digits = [0,1,2,3,4,5,6,7,8,9],
+	assign_digits(Lst, Digits),
+	M = 1, O = 0, S > 7, E < 9, N is E + 1,
+	1000*S + 100*E + 10*N + D +
+	1000*M + 100*O + 10*R + E =:=
+	10000*M + 1000*O + 100*N + 10*E + Y,
+	write(Lst).
+

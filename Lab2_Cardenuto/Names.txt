@@ -1,0 +1,15 @@
+Alexander Cardenuto
+
+Info from Fig4_12.c matching group two of /match\(\'[\+\*\^\(]\'\);/
+    
+match match('^');
+(
+    
+match match('+');
+(
+    
+match match('*');
+(
+    
+match match('(');
+(

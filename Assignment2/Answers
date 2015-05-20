@@ -1,0 +1,21 @@
+CS-471	
+Alexander Cardenuto
+Assignment 2
+
+
+
+1) Pragmas specifies how the compiler should handle the input given to it. It changes how the compiler will handle the code. The scanner processes this so that the pragmas are not a part of the parser syntax. (http://www.ross.net/funnelweb/reference/scanner_prag.html). Pragmas give programmers more control over the compilation of the code such as seeing how the code looks at each step pf compiling. More control to the user allows for more ways to cause errors. 
+
+2)  /\+1 (\([2-9][0-9][0-9]\)|[2-9][0-9][0-9] \-) [2-9][0-9][0-9] \- [0-9][0-9][0-9][0-9]/  
+
+3) Code in PhoneNums.rb
+
+4)A)-^ab^cd 
+  B)-a-^bcd
+  C)-^a^bcd
+  D)/d/*cba
+
+5)A)ab^cd^
+  B)abc^d--
+  C)abc^^d-
+  D)dcb*/a/

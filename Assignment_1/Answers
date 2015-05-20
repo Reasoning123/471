@@ -1,0 +1,90 @@
+CS471 - Programming Language
+Section: 01 
+Assignment #1 due: 09/09/2014
+Author: Cardenuto, Alexander
+Date: 09/09/2014
+
+1A) Rewrite the functional style C code using Python. 
+
+example code: Functional.py
+
+1B) Rewrite the functional style C code using Ruby. 
+
+example code: Functional.rb
+
+1C) Although Python and Ruby are both scripting language and have similar language design goals, they made different design choices. Pick a syntactic design which differs between Python and Ruby. Discuss which choice :
+
+    you prefer and why
+    makes it easier for you to write code and why
+    makes it easier for you to read code and why
+
+
+Answer: I prefer to code in python. Reading the code in python is easier the indentation makes it easy to determine where pieces of code belong. Whereas Ruby has the term end which I feel adds unecessary words to the page. Writing in python is easier for me since I like to make everything line up so it feels natural for me. 
+
+
+2) Page 36 exercise 1.1 a-d
+
+Answer: a) int number];
+	b) 998987 = int nope
+	c) with array of 3: array[1.3] //http://stackoverflow.com/questions/3673616/types-of-errors-during-compilation-and-at-runtime
+	d) with array of 3: array[4]
+
+
+3) Given the following properties (attributes) of a identifier(name), determine when the attributes are bound to the identifier(name). State which are properties (attributes) that are statically bound (can not change) and which are dynamically (can be change). Briefly explain you answer.
+
+        its data type
+        its scope
+        its value
+    for C
+    for Python
+    for Ruby 
+
+Answer: In C the data type and scope are statically bound and its value is dynamic. In python the scope and data type are static and its value is dynamic. In ruby the data type and value is dynamic and the scope is static.
+
+
+
+4) What does ISO stand for? When was the latest ISO specification for 'C' approved?  When was the latest Ansi/ISO specification for 'C++' approved? Does Java have an ISO specification? Does C# have an ISO specification? Does Python have an ISO specification? Does Ruby have an ISO specification?
+
+Answer:  ISO stands for in search of. ( International Organization for Standardization). The latest version was approved in 2011 ( http://en.wikipedia.org/wiki/C_%28programming_language%29) The latest specification ratified by the organization was in 2011 which was c++11. No java does not have an iso standard. (http://www.tbm.tudelft.nl/fileadmin/Faculteit/TBM/Over_de_Faculteit/Afdelingen/Afdeling_Infrastructure_Systems_and_Services/Sectie_Informatie_en_Communicatie_Technologie/medewerkers/tineke_egeydi/publications/doc/WhyJavaWasNotStandardised.pdf) Yes c# has a standard. (http://www.iso.org/iso/catalogue_detail.htm?csnumber=36768)  No python does nto have an ISO standard. (http://stackoverflow.com/questions/1535702/python-not-a-standardized-language) yes ruby has a standard. (http://www.iso.org/iso/iso_catalogue/catalogue_tc/catalogue_detail.htm?csnumber=59579)
+
+
+5) Page 37 exercise 1.5. In lab problem 4 you began this exercise, now please complete the rest of this problem. What are the implications of size limits on the portability of programs from one machine/compiler to another? How do the answers to these questions differ for Java? for Python? for Ada?
+
+Answer: Since there is a limit on size programmers have to be careful that the limits are the same when moving programs from one machine to another otherwise there may be overflow errors that are unexpected due to the code working correctly. For java and python the size of ints is 2^-31 to (2^31)-1. Whereas in ada the size of types are not defined.This would allow ada to be more portable than python and java. (http://www.radford.edu/~nokie/classes/320/fundamentals/fundTypes.html)
+
+
+6)    [Rosen,Discrete Mathematics and Its Applications 5th ed., pg 273 #48] "Consider the following inductive definition of a version of Ackermann's function.  This function was named after Wilhelm Ackermann, a German mathematician who was a student of the great mathematician David Hilbert.  Ackermann's function plays an important role in the theory of recursive functions and in the study of complexity of certain algorithms involving set unions."  In the early days of  imperative languages, Ackermann's function was used to measure the recursion capability of a compiler.
+
+    The Ackermann Number N of the compiler as the largest N for which
+              ack (3,N)
+    gives an answer without a stack overflow.  Recently, a variation has been used as one of the benchmarks for the XGC  Benchmarks.  (There are several different variants of this function.  All are called Ackermann's functions and their values do NOT have to agree!)   
+
+first: ack( m,n ) = 	n + 1        if m = 0
+second: ack( m,n ) = 	ack(m - 1, 1)     if n = 0 and m > 0 
+third: ack( m,n ) = 	ack( m-1, ack( m, n-1 ) )      if n >0 and m > 0
+
+Find the following values of Ackermann's function.  Show your work. 
+
+Answer:
+a)  ack(1,0) = 2. goes in 1,0, then goes to second function call which changes m and n to 0 and 1. then returns 2. 
+b)  ack(0,3) = 4 goes to first function call and returns 4. 
+c)  ack(1,2) = 4
+d)  ack(2,1) = 5
+e) code example: Ackerman.c  What is the Ackermann number (N) for your program?	The ackerman level is 13
+f) code example: Ackerman.py What is the Ackermann number (N) for your program? The ackerman level is 6 
+g) code example: Ackerman.rb What is the Ackermann number (N) for your program? The ackerman level is 9 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

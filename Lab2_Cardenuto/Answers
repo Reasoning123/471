@@ -1,0 +1,94 @@
+Alexander Cardenuto
+CS 471 Lab 2 
+
+2) A)  <command> -> <expr>
+       <expr> -> <term> '+' <expr> | <term> 
+ 	   factor -> '(' expr ')' | number
+       <term> -> <factor> | <factor> '*' <term> 
+       <number> -> <digit> | <number digit>
+       <digit> -> '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9'	 
+   
+	B) The highest precedence is multiplication 
+	c) 1) 2 + (7 * 100)
+	   2) (2 + 7) + 100
+
+	d)  <command> 
+		<expr>
+		<term> + <expr> 
+		<factor> + <term> 
+		<number> + <factor> * <term> 
+		<digit> + <number> * <factor>
+		2 + <digit> * <number>
+		2 + 7 * <number digit> 
+		2 + 7 * 100
+
+3) 	a) <command> -> <expr>
+       <expr> -> <term> '+' <expr> | <term> 
+	   <term> -> <expo> | <expo> '*' <term> 
+	   <expo> -> <factor> ^ <expo> | <factor>
+ 	   <factor< -> '(' expr ')' | <number>
+       <number> -> <digit> | <number digit>
+       <digit> -> '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9'	 
+
+	b)1)  (2 + 3) + 4
+	  2)  (2 ^ 3) * 2 + 5
+	  3)  2 + 3 * (2 ^ 5) 
+	  4)  (2 ^ 3) ^ 2
+	
+	c) Addition and multiplication are associative while the exponential is not and depending on the parentheses outputs different answers. 
+
+
+4) 	code in Fig4_12R.c
+
+5) 	code in Fig_12.c
+
+6) a) 		command -> expr '\n'
+		expr -> term |expr '+' term  | term  '+' term 
+		term -> factor | term '*' factor | factor '*' factor 
+		factor -> '(' expr ')' | number
+		number -> digit | number digit | digit { digit }
+		digit -> '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9'
+
+	b) the multiplication takes highest precedence. It is done before addition. 
+	c) 1) 2 + (7 * 100) 
+	   2) (2 + 7) + 100 
+
+	d) 1) 	command
+			::= expr 
+			::= term + term 
+			::= factor + term * factor 
+			::= number + factor * number 
+			::= digit + number * number digit 
+			::= 2 + digit * * 100 
+			::= 2 + 7 * 100 
+
+	   2)   command 
+			::= expr 
+			::= term + term 
+			::= factor + term + term 
+			::= number + factor + factor 
+			::= digit + number + number
+			::= 2 + digit + number digit 
+			::= 2 + 7 + 100
+
+7) 	A) 	command -> expr '\n'
+		expr -> term |expr '+' term  | term  '+' term 
+		term -> expo | term '*' expo | expo '*' expo 
+		expo -> factor | expo '^' factor | factor '^' factor
+		factor -> '(' expr ')' | number
+		number -> digit | number digit | digit
+		digit -> '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9'
+	
+	B)1) ((2 + 3) + 4)
+	  2) (((2 ^ 3) * 2) + 5)
+	  3) (2 + (3 * (2 ^ 5)))
+	  4) ((2 ^ 3) ^ 2)
+
+8) code in Fig4_12.c
+
+9)code in Lab2P6.rb
+				
+	
+		
+		
+		

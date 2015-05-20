@@ -1,0 +1,86 @@
+CS471 - Programming Language
+Section: 01 
+Lab #1 due: 09/04/2014
+Author: Alexander Cardenuto
+Date: 09/04/2014
+
+1A)	Static Semantic. The c; part of this line is not a valid expression but the 		compiler will catch this and generate an error. 
+  
+1B)	Static Semantic. The cs struct does not exist. Also, to declare a variable of a 	struct it needs to be inside the struct. 
+
+1C)	Static Semantic. The compiler will not allow for a name reserved for a data type to 		be used as a variable name. 
+
+1D)	Static Semantic. The number exceeds the capacity of a float causing an overflow 	error. 
+
+1E)	Dynamic Semantic. You are trying to access an element of the array that is out of 		bounds. 
+
+1F)	logical error. According to the programmer the variable called float was declared 		earlier this according to the programmer would be a valid statement. 
+
+1G)	Syntactical error. The statement "=>" is not valid, instead it should be ">=". 
+
+
+ 2) .cfi_startproc
+	pushq	%rbp
+	.cfi_def_cfa_offset 16
+	.cfi_offset 6, -16
+	movq	%rsp, %rbp
+	.cfi_def_cfa_register 6
+	movl	%edi, -4(%rbp)
+	movl	%esi, -8(%rbp)
+	jmp	.L2
+
+	//The block above is making room to hold the variables i an j in %rbp. This allows the values i and j to be transferred from %edi and %esi repectively to their place in %rbp.
+
+.L2:
+	movl	-4(%rbp), %eax
+	cmpl	-8(%rbp), %eax
+	jne	.L4
+
+//this moves the variable i to %eax and the compares it with the variable j if the two are not equal then it jumps to the .L4 block 
+
+	movl	-4(%rbp), %eax
+	popq	%rbp
+	.cfi_def_cfa 7, 8
+	ret
+	.cfi_endproc
+
+//if two are equal stays in current block and exits. The L2 block represents the while loop.
+
+
+.L4:
+	movl	-4(%rbp), %eax
+	cmpl	-8(%rbp), %eax
+	jle	.L3
+
+//compares i and j and then decides if  %eax(i) is greater than j. If not jumps to block L3. If so continunes on. 
+	movl	-8(%rbp), %eax
+	subl	%eax, -4(%rbp)
+	jmp	.L2
+
+//subtracts j from i then jumps to L2. 
+
+.L3:
+	movl	-4(%rbp), %eax
+	subl	%eax, -8(%rbp)
+
+
+subtract i from j. 
+
+3)A)   	The time complexity of the imperative style C code is O(n) and the space complexity is 1. This is assuming that j is not zero while i is greater than zero. Otherwise the loop will never end due to the end condition never being met. 
+
+3)B) 	The results between the two different functions would not be the same. The modulo operator takes the remainder of the two variables. To fix it you need to be able to fix the fact that the loop will end with one of the variables ending becoming indeterminate. The gcdM function would be faster when the variables difference is very large. Where as if the difference is small then the difference is miniscule that is is almost incomparable. 
+
+3)C) The name of the file for this question is lab1Driver.c. use the makefile to compile 
+	
+3)D) The time complexity of the function gcdR is O(logn) and the space complexity is constant. This is again assuming that j is not zero while i is greater than zero.
+
+4) The minimum an int can be is -21474483648 and the maximum is 21474483647.IN the event of an overflow the number will become incorrect. For example is you take the INT_MAX and add one instead of INT_MAX+1, the answer would become INT_MIN.
+
+5) A) file is question4a.py
+   B) file is question4b.rb
+   C) chmod +x file is used for making a file an executable. (http://stackoverflow.com/questions/817060/creating-executable-files-in-linux) The #! is used to tell what interpretter needs to run. (http://stackoverflow.com/questions/8967902/why-do-you-need-to-put-bin-bash-at-the-beginning-of-a-script-file)
+
+
+
+
+

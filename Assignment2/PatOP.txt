@@ -1,0 +1,25 @@
+PATTERNS:
+Harry = 
++1 (800) 432 - 3117
+ and Kathy phone number is +1 866 - 216 - 1072
+         
+PATTERNS:
+Joe = 
++1 (607) 777 - 4730
+
+         
+PATTERNS:
+
++1 607 - 777 - 4729
+
+         
+PATTERNS:
+Harry = 
++1 (800) 432 - 3117
+ 
+         
+PATTERNS:
+and Kathy phone number is 
++1 866 - 216 - 1072
+
+         
